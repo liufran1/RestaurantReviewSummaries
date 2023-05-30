@@ -22,8 +22,6 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 
 
 
-
-
 def format_prompt(cleansed_reviews):
   text_data=""
   iter=0
@@ -51,14 +49,6 @@ def clean_reviews(all_reviews):
   return ([unicodedata.normalize('NFKD',re.sub(r'<p class=\"comment.* lang=\"en\">|</span></p>','',str(x))) for x in all_reviews])
 
 
-# def clean_reviews(all_reviews):
-#   # all_reviews : list of strings
-#   return ([unicodedata.normalize('NFKD',str(x)
-#                   .replace('<p class="comment__09f24__D0cxf css-qgunke"><span class="raw__09f24__T4Ezm" lang="en">','')
-#                   .replace('</span></p>','')) 
-#                   for x in all_reviews])
-  
-#   # <p class=\"comment.* lang=\"en\">
 
 def get_top_cleanreviews(url, max_page=30):
   # Just start with first 3 pages
@@ -77,15 +67,6 @@ def get_top_cleanreviews(url, max_page=30):
 
   return cleansed_reviews
 
-  
-
-
-
-  # for pagenumber in range(10, 50, 10):
-  #   next_url = url+f'?start={pagenumber}'
-  #   next_reviews=get_reviews(next_url)
-  #   all_reviews+=next_reviews
-    
     
     
 
@@ -107,4 +88,23 @@ def get_all_cleanreviews(url):
       else:
         next_page=False
 
+    from sklearn.feature_extraction.text import TfidfVectorizer
+
+    import matplotlib.pyplot as plt
+    from sklearn.cluster import KMeans
+
+
+    vectorizer = TfidfVectorizer(stop_words='english')
+    X = vectorizer.fit_transform(cleansed_reviews)
+
+    true_k=20
+
+    model = KMeans(n_clusters=true_k, init='k-means++', max_iter=200, n_init=10)
+    model.fit(X)
+
+
+    labels=model.labels_
+    clusters=pd.DataFrame(list(zip(cleansed_reviews,labels)),columns=['title','cluster'])
+
+    return
     # do kmeans clustering here
