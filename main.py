@@ -3,8 +3,17 @@ import re
 import random
 
 from flask import Flask, request
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
 app = Flask(  # Create a flask app
 	__name__,
+)
+
+limiter = Limiter(
+    app=app,
+    key_func=get_remote_address,
+    default_limits=["10 per minute"] # Based on OpenAI limit of 40,000 Tokens per Minute
 )
 
 
