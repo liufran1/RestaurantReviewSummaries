@@ -2,7 +2,7 @@
 
 
 **To Do**:
-
+* Turn into package to make dependency management easier
 * Wrap application into an API and deploy on server
   * Start with inputting URL
 * Build front end that makes the API call
