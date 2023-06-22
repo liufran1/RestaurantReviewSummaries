@@ -53,8 +53,8 @@ def clean_reviews(all_reviews):
 
 
 
-def get_top_cleanreviews(url, max_page=30):
-  # Just start with first 3 pages
+def get_top_cleanreviews(url, max_page=10):
+  # Just start with first page
   all_reviews=[]
 
   with concurrent.futures.ThreadPoolExecutor() as executor:

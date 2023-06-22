@@ -30,10 +30,15 @@ def get_summary():
 
   
   cleansed_reviews = restuarantsummarize.get_top_cleanreviews(input_url)
+  if not cleansed_reviews:
+    return "Error getting reviews", 400
   prompt = restuarantsummarize.format_prompt(cleansed_reviews)
-  
+
   result = restuarantsummarize.get_completion(prompt)
-  return f"review summary for {input_url}: {result}", 200
+  if result:
+    return f"review summary for {input_url}: {result}", 200
+  else:
+    return "Error getting summary", 400
 
 
 if __name__ == "__main__":  # Makes sure this is the main process
