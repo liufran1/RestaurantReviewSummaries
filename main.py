@@ -16,6 +16,9 @@ limiter = Limiter(
     default_limits=["10 per minute"] # Based on OpenAI limit of 40,000 Tokens per Minute
 )
 
+@app.route('/')
+def index():
+    return 'Franklin\'s app server is running', 200
 
 @app.route('/reviews', methods=['GET'])
 def get_summary():
