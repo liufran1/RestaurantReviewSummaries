@@ -7,5 +7,5 @@ setup(
    author='Franklin Liu',
    author_email='me@franklinliu.com',
    packages=find_packages(exclude=['test']),  #same as name
-   install_requires=['bs4', 'pandas', 'openai'], 
+   install_requires=['bs4', 'pandas', 'openai', 'python-dotenv'], 
 )

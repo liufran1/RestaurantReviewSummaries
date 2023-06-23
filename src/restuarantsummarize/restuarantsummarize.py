@@ -12,11 +12,12 @@ import os
 
 from dotenv import load_dotenv, find_dotenv
 
-if os.environ['open_api_key']:
-  openai_api_key = os.environ['open_api_key']
-else:
-  _ = load_dotenv(find_dotenv())
-  openai_api_key = os.environ['open_api_key']
+_ = load_dotenv(find_dotenv())
+
+openai_api_key = os.environ['open_api_key']
+
+  
+  
   
 openai.api_key = openai_api_key
 
