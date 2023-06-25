@@ -1,3 +1,13 @@
+Create lambda layer image
+`docker build --platform=linux/amd64 --tag get_reviews .`
+
+In container:
+`pip install RestaurantReviewSummaries/src/ -t python/`
+
+`zip -r get_reviews_lambda.zip .`
+
+In local:
+`docker cp <container_id>:/var/task/get_reviews_lambda.zip .`
 
 
 
