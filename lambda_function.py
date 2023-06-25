@@ -1,6 +1,8 @@
 import json
 import random
 import restuarantsummarize
+import re
+
 
 def lambda_handler(event, context):
     pattern = re.compile("^.*yelp.com\/biz.*$")
