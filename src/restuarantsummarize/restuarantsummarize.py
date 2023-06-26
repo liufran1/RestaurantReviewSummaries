@@ -30,16 +30,12 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 
 
 
-def format_prompt(cleansed_reviews):
-  text_data=""
-  iter=0
-  for line in cleansed_reviews:
-    text_data+=str(iter)+' '+line+'\n'
-    iter+=1
+def format_prompt(cleansed_reviews, delimiter="####"):
+  text_data = delimiter.join(cleansed_reviews)
 
   return f"""
-  here are some reviews for a restaurant delimited by the newline character - 
-  give me an overall review of the restaurant based off of them:
+  here are some reviews delimited by four hashtags i.e. {delimiter}
+  give me an overall review based off of them:
   ```
   {text_data}
   ```
