@@ -23,6 +23,9 @@ On AWS:
 
 **Improvements**:
 * Handle additional 500 scenarios
+  * Bad URLs
+  * too much text on resulting page
+  * no reviews on resulting page
 * Automate deployment steps
 * Generalize to any site that has reviews - (prompt chaining)[https://learn.deeplearning.ai/chatgpt-building-system/]
   * reading the raw html is too many tokens
