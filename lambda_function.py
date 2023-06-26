@@ -21,13 +21,15 @@ def lambda_handler(event, context):
                 'body': json.dumps('Input a valid url')
             }
 
-    if not pattern.match(input_url):
-        return {
+    if pattern.match(input_url):
+      cleansed_reviews = restuarantsummarize.get_top_yelp_cleanreviews(input_url)
+    else:  
+      return {
                 'statusCode': 400,
                 'body': json.dumps('Only yelp.com/biz sites currently supported. Input a yelp website')
             }
     
-    cleansed_reviews = restuarantsummarize.get_top_cleanreviews(input_url)
+    
     
     if not cleansed_reviews:
         return {

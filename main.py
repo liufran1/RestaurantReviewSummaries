@@ -28,7 +28,7 @@ def get_summary():
   if input_url is None:
     return 'Input a valid url', 400
   if pattern.match(input_url):
-    cleansed_reviews = restuarantsummarize.get_top_cleanreviews(input_url)    
+    cleansed_reviews = restuarantsummarize.get_top_yelp_cleanreviews(input_url)    
   else:
     return 'Input a yelp website', 400
   
