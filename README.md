@@ -12,12 +12,14 @@ In local:
 
 
 **To Do**:
-* Wrap application into an API and deploy on server
-  * Start with inputting URL
+
 * Build front end that makes the API call
   * Probably can't get time under 10 seconds - set up progress bar animation that progresses based on steps
 
 **Improvements**:
+* Generalize to any site that has reviews - (prompt chaining)[https://learn.deeplearning.ai/chatgpt-building-system/]
+  * reading the raw html is too many tokens
+  * get all tags that contain text. pass tag and example to ChatGPT to identify what elements to pull all of 
 * Parallelize website scraping when retrieving all reviews
 * Add in clustering to functions
 * refine text clustering method 
