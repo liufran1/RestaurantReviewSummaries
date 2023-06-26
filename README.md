@@ -22,6 +22,7 @@ On AWS:
   * Probably can't get time under 10 seconds - set up progress bar animation that progresses based on steps
 
 **Improvements**:
+* Handle additional 500 scenarios
 * Automate deployment steps
 * Generalize to any site that has reviews - (prompt chaining)[https://learn.deeplearning.ai/chatgpt-building-system/]
   * reading the raw html is too many tokens

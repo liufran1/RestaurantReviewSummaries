@@ -49,12 +49,12 @@ def format_prompt(cleansed_reviews, delimiter="####"):
 
 
 def get_reviews(url):
-  r = requests.get(url)
+  r = requests.get(clean_url(url))
   soup = BeautifulSoup(r.text, 'html.parser')
   text_items = [i.text for i in soup.find_all("p") if len(i.text)>100] # Grab any html element with more than 100 characters of text
   return text_items
 
-def get_yelp_reviews(url):
+def get_yelp_reviews(clean_url(url)):
   r = requests.get(url)
   soup = BeautifulSoup(r.text, 'html.parser')
   reviews = soup.find_all("p", {"class": re.compile("^comment*")})

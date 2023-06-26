@@ -8,7 +8,7 @@ def lambda_handler(event, context):
     pattern = re.compile("^.*yelp.com\/biz.*$")
 
     try:
-        input_url = restuarantsummarize.clean_url(event['queryStringParameters']['input_url'])
+        input_url = event['queryStringParameters']['input_url']
     except:
         return {
                 'statusCode': 200,

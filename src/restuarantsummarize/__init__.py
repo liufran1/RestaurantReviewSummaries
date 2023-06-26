@@ -1,1 +1,1 @@
-from .restuarantsummarize import get_top_cleanreviews,get_reviews, format_prompt, get_completion, get_top_yelp_cleanreviews, clean_url
+from .restuarantsummarize import get_top_cleanreviews, get_reviews, format_prompt, get_completion, get_top_yelp_cleanreviews
