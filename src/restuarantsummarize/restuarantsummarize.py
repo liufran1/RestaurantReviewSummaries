@@ -28,7 +28,12 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
     )
     return response.choices[0].message["content"]
 
-
+def clean_url(input_url):
+  url_pattern = re.compile("^http[s]?:\/\/.*")
+  if url_pattern.match(input_url):
+    return input_url
+  else:
+    return "https://"+input_url
 
 def format_prompt(cleansed_reviews, delimiter="####"):
   text_data = delimiter.join(cleansed_reviews)
@@ -42,11 +47,12 @@ def format_prompt(cleansed_reviews, delimiter="####"):
   """
 
 
+
 def get_reviews(url):
   r = requests.get(url)
   soup = BeautifulSoup(r.text, 'html.parser')
-  reviews = soup.find_all("p", {"class": re.compile("^comment*")})
-  return reviews
+  text_items = [i.text for i in soup.find_all("p") if len(i.text)>100] # Grab any html element with more than 100 characters of text
+  return text_items
 
 def get_yelp_reviews(url):
   r = requests.get(url)
@@ -68,7 +74,7 @@ def get_top_cleanreviews(url, max_page=10):
           next_reviews = future.result()
           all_reviews += next_reviews
 
-  cleansed_reviews = clean_reviews(all_reviews)
+  cleansed_reviews = all_reviews
 
   return cleansed_reviews
 

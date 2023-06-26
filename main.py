@@ -24,7 +24,8 @@ def index():
 def get_summary():
   pattern = re.compile("^.*yelp.com\/biz.*$")
   
-  input_url = request.args.get('input_url')
+  input_url = restuarantsummarize.clean_url(request.args.get('input_url'))
+  
   if input_url is None:
     return 'Input a valid url', 400
   if pattern.match(input_url):
