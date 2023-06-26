@@ -52,7 +52,17 @@ def get_reviews(url):
   reviews = soup.find_all("p", {"class": re.compile("^comment*")})
   return reviews
 
+def get_yelp_reviews(url):
+  r = requests.get(url)
+  soup = BeautifulSoup(r.text, 'html.parser')
+  reviews = soup.find_all("p", {"class": re.compile("^comment*")})
+  return reviews
+
 def clean_reviews(all_reviews):
+  # all_reviews : list of strings
+  return ([unicodedata.normalize('NFKD',re.sub(r'<p class=\"comment.* lang=\"en\">|</span></p>','',str(x))) for x in all_reviews])
+
+def clean_yelp_reviews(all_reviews):
   # all_reviews : list of strings
   return ([unicodedata.normalize('NFKD',re.sub(r'<p class=\"comment.* lang=\"en\">|</span></p>','',str(x))) for x in all_reviews])
 
@@ -75,6 +85,22 @@ def get_top_cleanreviews(url, max_page=10):
 
   return cleansed_reviews
 
+def get_top_yelp_cleanreviews(url, max_page=10):
+  # Just start with first page
+  all_reviews=[]
+
+  with concurrent.futures.ThreadPoolExecutor() as executor:
+      urls = [url + f'?start={pagenumber}' for pagenumber in range(0, max_page, 10)]
+      
+      futures = [executor.submit(get_yelp_reviews, url) for url in urls]
+      
+      for future in concurrent.futures.as_completed(futures):
+          next_reviews = future.result()
+          all_reviews += next_reviews
+
+  cleansed_reviews = clean_yelp_reviews(all_reviews)
+
+  return cleansed_reviews
     
     
 

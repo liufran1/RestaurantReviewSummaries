@@ -27,14 +27,15 @@ def get_summary():
   input_url = request.args.get('input_url')
   if input_url is None:
     return 'Input a valid url', 400
-  if not pattern.match(input_url):
+  if pattern.match(input_url):
+    cleansed_reviews = restuarantsummarize.get_top_cleanreviews(input_url)    
+  else:
     return 'Input a yelp website', 400
   
 
   
-  cleansed_reviews = restuarantsummarize.get_top_cleanreviews(input_url)
   if not cleansed_reviews:
-    return "Error getting reviews", 400
+      return "Error getting reviews", 400
   prompt = restuarantsummarize.format_prompt(cleansed_reviews)
 
   result = restuarantsummarize.get_completion(prompt)
