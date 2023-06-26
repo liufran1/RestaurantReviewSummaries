@@ -8,7 +8,7 @@ def lambda_handler(event, context):
     pattern = re.compile("^.*yelp.com\/biz.*$")
 
     try:
-        input_url = event['queryStringParameters']['input_url']
+        input_url = restuarantsummarize.clean_url(event['queryStringParameters']['input_url'])
     except:
         return {
                 'statusCode': 200,
@@ -24,10 +24,7 @@ def lambda_handler(event, context):
     if pattern.match(input_url):
       cleansed_reviews = restuarantsummarize.get_top_yelp_cleanreviews(input_url)
     else:  
-      return {
-                'statusCode': 400,
-                'body': json.dumps('Only yelp.com/biz sites currently supported. Input a yelp website')
-            }
+      cleansed_reviews = restuarantsummarize.get_reviews(input_url)
     
     
     

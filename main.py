@@ -31,7 +31,7 @@ def get_summary():
   if pattern.match(input_url):
     cleansed_reviews = restuarantsummarize.get_top_yelp_cleanreviews(input_url)    
   else:
-    return 'Input a yelp website', 400
+    cleansed_reviews = restuarantsummarize.get_reviews(input_url)
   
 
   
