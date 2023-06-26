@@ -56,16 +56,7 @@ def get_yelp_reviews(url):
   r = requests.get(url)
   soup = BeautifulSoup(r.text, 'html.parser')
   reviews = soup.find_all("p", {"class": re.compile("^comment*")})
-  return reviews
-
-def clean_reviews(all_reviews):
-  # all_reviews : list of strings
-  return ([unicodedata.normalize('NFKD',re.sub(r'<p class=\"comment.* lang=\"en\">|</span></p>','',str(x))) for x in all_reviews])
-
-def clean_yelp_reviews(all_reviews):
-  # all_reviews : list of strings
-  return ([unicodedata.normalize('NFKD',re.sub(r'<p class=\"comment.* lang=\"en\">|</span></p>','',str(x))) for x in all_reviews])
-
+  return [x.text for x in reviews]
 
 
 def get_top_cleanreviews(url, max_page=10):
@@ -98,8 +89,7 @@ def get_top_yelp_cleanreviews(url, max_page=10):
           next_reviews = future.result()
           all_reviews += next_reviews
 
-  cleansed_reviews = clean_yelp_reviews(all_reviews)
-
+  cleansed_reviews = all_reviews
   return cleansed_reviews
     
     
