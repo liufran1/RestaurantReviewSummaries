@@ -1,5 +1,5 @@
 Create lambda layer image
-`docker build --platform=linux/amd64 --tag get_reviews .`
+`docker build --platform=linux/amd64 --no-cache --tag get_reviews .`
 
 In container:
 `pip install RestaurantReviewSummaries/src/ -t python/`
