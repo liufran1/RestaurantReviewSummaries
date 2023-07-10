@@ -27,6 +27,9 @@ On AWS:
   * too much text on resulting page
   * no reviews on resulting page
 * Automate deployment steps
+* Use open source LLM to avoid OpenAI API costs, or at least abstract the LLM used
+  * Might just end up shifting API costs to bearing the cloud compute costs directly
+  * Adds friction to deployments - need to do work to tune the LLM installation to the specifics of the docker container
 * Generalize to any site that has reviews - (prompt chaining)[https://learn.deeplearning.ai/chatgpt-building-system/]
   * reading the raw html is too many tokens
   * get all tags that contain text. pass tag and example to ChatGPT to identify what elements to pull all of 
