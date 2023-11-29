@@ -19,14 +19,14 @@ openai_api_key = os.environ['open_api_key']
   
 openai.api_key = openai_api_key
 
-def get_completion(prompt, model="gpt-3.5-turbo"): 
+def get_completion(prompt, model="gpt-3.5-turbo"):
     messages = [{"role": "user", "content": prompt}]
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model=model,
         messages=messages,
-        temperature=0, 
+        temperature=0,
     )
-    return response.choices[0].message["content"]
+    return response.choices[0].message.content
 
 def clean_url(input_url):
   url_pattern = re.compile("^http[s]?:\/\/.*")
